@@ -1,24 +1,30 @@
 <?php
+
 // Read and write for owner, nothing for everybody else
 //chmod("/xxx", 0600);
 
 // Read and write for owner, read for everybody else
-// chmod("/somedir/somefile", 0644);
+chmod("docs", 0644);
 
 // Everything for owner, read and execute for others
-chmod("/xxx/", 0755);
+//chmod("/xxx/", 0755);
 
 // Everything for owner, read and execute for owner's group
 // chmod("/somedir/somefile", 0750);
 
+echo "Valor 1: " , (substr(printf('%o', fileperms('index.php')), -4));
+echo "<br>";
 
+echo "Valor 2: " , substr(sprintf('%o', fileperms('docs')), -4);
+echo "<br>";
 
+echo "Valor 3: " , substr(sprintf('%o', fileperms('/xxx/permisos.php')), -4);
+echo "<br>";
 
+//echo substr(sprintf('%o', fileperms('/etc/passwd')), -4);
 
-// $permisos = fileperms('/etc/passwd');
-
-$permisos = fileperms('/xxx');
-
+echo "Valor 4: " , $permisos = fileperms('docs');
+echo "<br>";
 
 switch ($perms & 0xF000) {
     case 0xC000: // Socket
@@ -67,5 +73,6 @@ $info .= (($permisos & 0x0001) ?
             (($permisos & 0x0200) ? 't' : 'x' ) :
             (($permisos & 0x0200) ? 'T' : '-'));
 
-echo $info;
+echo "Valor 5: " , $info;
+
 ?>
